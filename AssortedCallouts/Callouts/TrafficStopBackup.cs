@@ -186,6 +186,18 @@ namespace AssortedCallouts.Callouts
                         PoliceOfficer.BlockPermanentEvents = true;
                         PoliceOfficer.Tasks.FollowNavigationMeshToPosition(PoliceCar.GetOffsetPosition(Vector3.RelativeLeft * 2f), PoliceCar.Heading, 1.6f).WaitForCompletion(6000);
                         PoliceOfficer.Tasks.EnterVehicle(PoliceCar, 7000, -1).WaitForCompletion();
+
+                        // definitely turn the siren off
+                        PoliceCar.IsSirenSilent = true;
+
+                        // maybe also turn off lights to ensure siren is off for ELS cars
+                        if (AssortedCalloutsHandler.LightsOffForELSCars &&
+                            PoliceCar.IsSirenOn &&
+                            Albo1125.Common.CommonLibrary.ExtensionMethods.VehicleModelIsELS(PoliceCar))
+                        {
+                            PoliceCar.IsSirenOn = false;
+                        }
+
                         PoliceOfficer.Tasks.PerformDrivingManeuver(VehicleManeuver.Wait);
 
                         while (true)
