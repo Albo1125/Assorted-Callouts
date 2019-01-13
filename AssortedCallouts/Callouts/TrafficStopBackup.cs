@@ -101,6 +101,7 @@ namespace AssortedCallouts.Callouts
         public override bool OnCalloutAccepted()
         {
             PoliceCar = new Vehicle(CopCarModel, SpawnPoint, SpawnHeading);
+            Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(PoliceCar);
             PoliceCar.MakePersistent();
             PoliceCar.IsSirenOn = true;
             PoliceCar.IsSirenSilent = true;
@@ -111,6 +112,7 @@ namespace AssortedCallouts.Callouts
             PoliceOfficerBlip.IsRouteEnabled = true;
             PoliceOfficer.RelationshipGroup = "PLAYER";
             SuspectCar = new Vehicle(suspectCarModel, PoliceCar.GetOffsetPosition(Vector3.RelativeFront * 9f), PoliceCar.Heading);
+            Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(SuspectCar);
             SuspectCar.MakePersistent();
             Suspect = SuspectCar.CreateRandomDriver();
             Suspect.MakeMissionPed();

@@ -477,6 +477,7 @@ namespace AssortedCallouts.Callouts.StoreRelated
                 }
             }
             EscapeVan = new Vehicle("SPEEDO", World.GetNextPositionOnStreet(SpawnPoint), 0f);
+            Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(EscapeVan);
             EscapeVan.Heading = EscapeVan.CalculateHeadingTowardsEntity(Suspects[0]) + 180f;
             EscapeVan.IsPersistent = true;
             EscapeVanDriver = EscapeVan.CreateRandomDriver();
