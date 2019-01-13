@@ -1321,8 +1321,37 @@ namespace AssortedCallouts.Callouts
                                         //PoliceOfficer.Inventory.GiveNewWeapon("WEAPON_PISTOL", -1, false);
 
 
+                                        List<List<string>> alcoholFollowUpSpeeches = new List<List<string>>
+                                        {
+                                            new List<string>
+                                            { "I could smell alcohol on the driver's breath.",
+                                                "I don't have my breathalyzer with me, though.",
+                                                "Could you breathalyze the driver for me?", "If they're over the limit, arrest them."
+                                            },
+                                            new List<string>
+                                            {
+                                                "Hmmm... my breathalyzer is acting up. I think the battery is dead.",
+                                                "Would you mind doing the honours?"
+                                            },
+                                            new List<string>
+                                            {
+                                                "There's definitely some alcohol involved here.",
+                                                "Can you run a sobriety test? I want to just check the plate details again.",
+                                            },
+                                            new List<string>
+                                            {
+                                                "I think I could smell some alcohol or something.",
+                                                "Would you mind just going to check and see what you think?",
+                                                "Maybe you could run a breath test on them too?"
+                                            },
+                                            new List<string>
+                                            {
+                                                "These cheap crappy breathalyzers keep going wrong.",
+                                                "Damn budget cuts. Do you have one on you? Could you check the driver?"
+                                            }
+                                        };
 
-                                        SpeechHandler.HandleSpeech("Officer", new List<string>() { "I could smell alcohol on the driver's breath.", "I don't have my breathalyzer with me, though.", "Could you breathalyze the driver for me?", "If they're over the limit, arrest them." } );
+                                        SpeechHandler.HandleSpeech("Officer",  alcoholFollowUpSpeeches[AssortedCalloutsHandler.rnd.Next(alcoholFollowUpSpeeches.Count)]);
                                         break;
 
 
@@ -1432,19 +1461,147 @@ namespace AssortedCallouts.Callouts
 
         private List<List<string>> AlcoholSpeeches = new List<List<string>>()
         {
-            new List<string>() {"Howdy!", "This person here was all over the road!", "I spotted him and pulled him over.", "I'm going to see what the deal is.", "Please hang around for a minute." },
-            new List<string>() {"Hey officer!", "This person here was swerving in and out of the lane.", "Their driving was pretty erratic, too.", "I'm going to check them out.", "Please hang around for a bit." },
+            new List<string>() {
+                "Howdy!",
+                "This person here was all over the road!",
+                "I spotted him and pulled him over.",
+               "I'm going to see what the deal is.",
+               "Please hang around for a minute." },
+
+            new List<string>() {
+                "Hey officer!",
+                "This person here was swerving in and out of the lane.",
+                "Their driving was pretty erratic, too.",
+                "I'm going to check them out.",
+                "Please hang around for a bit." },
+            new List<string>
+            {
+                "Thanks for coming along.",
+                "I've pulled over this driver for the way they were driving.",
+                "I'm suspicious they may be intoxicated by their failure to maintain lanes.",
+                "I got a 'bad vibe', so I hope you don't mind backing me up on this.",
+                "If you could just stay nearby in case anything happens, I'd appreciate it."
+            },
+            new List<string>
+            {
+                "Hi! It's been such a busy shift for me so far.",
+                "Anyway. This driver seemed a bit unsure about which lane they were in.",
+                "I followed them for another mile and they switched lanes again and again.",
+                "I don't like this area very much, so I wanted some backup while I check them out.",
+                "Please stay around the vehicle while I go and make contact. Thanks."
+            },
+            new List<string>
+            {
+                "I felt like I needed some backup on this one.",
+                "Driver of the vehicle in front was stopped for almost causing a crash.",
+                "I have a funny feeling there might be drink or drugs involved.",
+                "If you could remain on scene while I make contact that would be great."
+            },
+            new List<string>
+            {
+                "I've not made contact with the driver yet.",
+                "The situation is that they were driving unusually slowly.",
+                "When I started to follow, they freaked out and began to drive erratically.",
+                "Something seems a bit 'off' on this one, so I appreciate you coming along.",
+                "I'll go see what's up."
+            },
+            new List<string>
+            {
+                "I'm almost done with my shift, thank goodness! Hopefully this is my last one.",
+                "The driver here came off the road briefly and almost hit a pedestrian.",
+                "The pedestrian is fine and left the scene already, but I've not made contact with the driver.",
+                "Let's have a look and see what's going on..."
+            },
+            new List<string>
+            {
+                "Thanks for getting here.",
+                "I initiated the traffic stop here due to the swerving of the driver of the vehicle.",
+                "There's a good chance there is a DUI on this one.",
+                "Just hang about for a bit and I'll see if I can smell anything in the vehicle."
+            }
         };
 
         private List<List<string>> TicketSpeeches = new List<List<string>>()
         {
-            new List<string>() {"Hey officer! Having a good day?", "The vehicle I've pulled over was speeding.", "I'm going to write out a ticket for that offence.", "Please act as backup while I do so." },
-            new List<string>() {"How are you today?", "This stretch of road is notorious for its many collisions.", "The driver of that vehicle was using their mobile phone.", "Please watch my back while I write out a ticket." },
+            new List<string>() {
+                "Hey officer! Having a good day?",
+                "The vehicle I've pulled over was speeding.",
+                "I'm going to write out a ticket for that offence.",
+                "Please act as backup while I do so."
+            },
+            new List<string>() {
+                "How are you today?",
+                "This stretch of road is notorious for its many collisions.",
+                "The driver of that vehicle was using their mobile phone.",
+                "Please watch my back while I write out a ticket." },
             
-            new List<string>() {"Hey, how's it going?", "The driver of that vehicle cut someone off back there.", "Their driving was pretty erratic and anti-social.", "I'm going to slap them with a ticket.", "Hang around for a moment, please." },
-            new List<string>() {"Good day!", "The vehicle I've just pulled over has no insurance!", "They're going to be getting a ticket from me.", "Can you please stay around in case they kick off?" },
+            new List<string>() {
+                "Hey, how's it going?",
+                "The driver of that vehicle cut someone off back there.",
+                "Their driving was pretty erratic and anti-social.",
+                "I'm going to slap them with a ticket.",
+                "Hang around for a moment, please." },
+            new List<string>() {
+                "Good day!",
+                "The vehicle I've just pulled over has no insurance!",
+                "They're going to be getting a ticket from me.",
+                "Can you please stay around in case they kick off?" },
 
-            new List<string>() {"How nice to see you again, officer!", "Do you understand why people don't wear seat belts?", "The driver of that vehicle wasn't wearing theirs!", "Hang around while I write a ticket, will you?" },
+            new List<string>() {
+                "How nice to see you again, officer!",
+                "Do you understand why people don't wear seat belts?",
+                "The driver of that vehicle wasn't wearing theirs!",
+                "Hang around while I write a ticket, will you?" },
+
+            new List<string>
+            {
+                "How is it going?",
+                "I saw the driver here texting while driving.",
+                "We obviously want to make sure we deal with that robustly!",
+                "I am going to write a ticket, but I wanted backup in case something happened.",
+                "Thanks."
+            },
+            new List<string>
+            {
+                "Hello. The vehicle here ran a stop sign a little way back.",
+                "I followed and finally was able to find a good place for the pullover.",
+                "I'm going to write a ticket for the stop sign. Hang around for a bit please!"
+            },
+            new List<string>
+            {
+                "Hi there. Classic seatbelt offence here!",
+                "I was going in the other direction and spotted the driver put the seatbelt on when they saw me.",
+                "Not quick enough for me! 'Lightning Eyes' they call me.",
+                "Ummmm... anyway, could you hang around. I'm going to get a ticket out of this!"
+            },
+            new List<string>
+            {
+                "Gosh I hate this stretch of road. Thanks for backing me up.",
+                "We had this vehicle fail to signal when making a turn.",
+                "Going to write out a ticket, but I wanted someone else on scene. Thanks."
+            },
+            new List<string>
+            {
+                "Got a regular wise guy here.",
+                "I saw this driver cut someone off. They were just driving aggressively.",
+                "I think a ticket might bring 'em down a notch. What do you think?",
+                "Anyway, I'll go speak to the driver and do the paperwork."
+            },
+            new List<string>
+            {
+                "I caught this one doing 11 over the limit.",
+                "I try and cut people a break, but that was **fast**.",
+                "They took like a quarter mile to actually pull over though, so I was worried a bit.",
+                "Anyway, if you could wait while I write out the ticket I'd appreciate it."
+            },
+            new List<string>
+            {
+                "This individual failed to signal properly.",
+                "When I put my lights on though, they pretended not to notice.",
+                "Then they pulled over, but then signalled as if they were going to drive away again.",
+                "Something doesn't feel quite right.",
+                "Hopefully this is just a ticket if everything checks out."
+            }
 
         };
 
