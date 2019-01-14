@@ -103,7 +103,7 @@ namespace AssortedCallouts.Callouts
             PoliceCar = new Vehicle(CopCarModel, SpawnPoint, SpawnHeading);
             PoliceCar.MakePersistent();
 
-            if (AssortedCalloutsHandler.LightsOffForELSCars && Albo1125.Common.CommonLibrary.ExtensionMethods.VehicleModelIsELS(PoliceCar))
+            if (AssortedCalloutsHandler.LightsOffForELSCars && PoliceCar.VehicleModelIsELS())
             {
                 PoliceCar.IsSirenOn = false;
                 PoliceCar.IsSirenSilent = false;
@@ -193,7 +193,7 @@ namespace AssortedCallouts.Callouts
                         // maybe also turn off lights to ensure siren is off for ELS cars
                         if (AssortedCalloutsHandler.LightsOffForELSCars &&
                             PoliceCar.IsSirenOn &&
-                            Albo1125.Common.CommonLibrary.ExtensionMethods.VehicleModelIsELS(PoliceCar))
+                            PoliceCar.VehicleModelIsELS())
                         {
                             PoliceCar.IsSirenOn = false;
                         }
