@@ -198,7 +198,7 @@ namespace AssortedCallouts.Callouts.Solicitation
                         float CarHeading;
                         World.GetNextPositionOnStreet(Hooker.GetOffsetPosition(Vector3.RelativeLeft * AssortedCalloutsHandler.rnd.Next(260, 410)).Around(70)).GetClosestVehicleNodeWithHeading(out CarSpawn, out CarHeading);
                         SuspectCar = new Vehicle(CarsToSelectFrom[AssortedCalloutsHandler.rnd.Next(CarsToSelectFrom.Length)], CarSpawn, CarHeading);
-                        Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(SuspectCar);
+                        SuspectCar.RandomiseLicencePlate();
                         SuspectCar.IsPersistent = true;
                         Suspect = SuspectCar.CreateRandomDriver();
                         while (Suspect.IsFemale)

@@ -105,14 +105,14 @@ namespace AssortedCallouts.Callouts
             if (SelectedModelInfo.ChosenModel.IsTrailer)
             {
                 SuspectCar = new Vehicle("PHANTOM", SpawnPoint, SpawnHeading);
-                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(SuspectCar);
+                SuspectCar.RandomiseLicencePlate();
                 SuspectCar.Trailer = new Vehicle(SelectedModelInfo.ChosenModel, SpawnPoint, SpawnHeading);
-                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(SuspectCar.Trailer);
+                SuspectCar.Trailer.RandomiseLicencePlate();
             }
             else
             {
                 SuspectCar = new Vehicle(SelectedModelInfo.ChosenModel, SpawnPoint, SpawnHeading);
-                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(SuspectCar);
+                SuspectCar.RandomiseLicencePlate();
             }
             SuspectCar.IsPersistent = true;
             SuspectCar.IsEngineOn = true;

@@ -68,7 +68,7 @@ namespace AssortedCallouts.Callouts
         public override bool OnCalloutAccepted()
         {
             SuspectCar = new Vehicle(CopCarModel, SpawnPoint);
-            Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(SuspectCar);
+            SuspectCar.RandomiseLicencePlate();
             SuspectCar.MakePersistent();
             Suspect = new Ped(Vector3.Zero);
             Suspect.MakeMissionPed();
