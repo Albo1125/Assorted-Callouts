@@ -292,6 +292,7 @@ namespace AssortedCallouts.Callouts
                     vehheading = Vehicles[Vehicles.Count - 1].Heading;
                 }
                 Vehicle veh = new Vehicle(model, vehspawn, vehheading);
+                veh.RandomiseLicencePlate();
                 veh.MakePersistent();
                 int randomNumber = AssortedCalloutsHandler.rnd.Next(4);
 

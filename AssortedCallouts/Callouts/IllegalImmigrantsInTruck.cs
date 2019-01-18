@@ -64,6 +64,7 @@ namespace AssortedCallouts.Callouts
         {
             
             SuspectCar = new Vehicle(TruckModels[AssortedCalloutsHandler.rnd.Next(TruckModels.Length)], SpawnPoint, SpawnHeading);
+            SuspectCar.RandomiseLicencePlate();
             SuspectCar.MakePersistent();
             CarModelName = SuspectCar.Model.Name.ToLower();
             CarModelName = char.ToUpper(CarModelName[0]) + CarModelName.Substring(1);
