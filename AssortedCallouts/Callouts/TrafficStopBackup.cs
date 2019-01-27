@@ -103,8 +103,18 @@ namespace AssortedCallouts.Callouts
             PoliceCar = new Vehicle(CopCarModel, SpawnPoint, SpawnHeading);
             PoliceCar.RandomiseLicencePlate();
             PoliceCar.MakePersistent();
-            PoliceCar.IsSirenOn = true;
-            PoliceCar.IsSirenSilent = true;
+
+            if (AssortedCalloutsHandler.LightsOffForELSCars && PoliceCar.VehicleModelIsELS())
+            {
+                PoliceCar.IsSirenOn = false;
+                PoliceCar.IsSirenSilent = false;
+            }
+            else
+            {
+                PoliceCar.IsSirenOn = true;
+                PoliceCar.IsSirenSilent = true;
+            }
+
             PoliceOfficer = PoliceCar.CreateRandomDriver();
             PoliceOfficer.MakeMissionPed();
             PoliceOfficerBlip = PoliceOfficer.AttachBlip();
@@ -178,6 +188,18 @@ namespace AssortedCallouts.Callouts
                         PoliceOfficer.BlockPermanentEvents = true;
                         PoliceOfficer.Tasks.FollowNavigationMeshToPosition(PoliceCar.GetOffsetPosition(Vector3.RelativeLeft * 2f), PoliceCar.Heading, 1.6f).WaitForCompletion(6000);
                         PoliceOfficer.Tasks.EnterVehicle(PoliceCar, 7000, -1).WaitForCompletion();
+
+                        // definitely turn the siren off
+                        PoliceCar.IsSirenSilent = true;
+
+                        // maybe also turn off lights to ensure siren is off for ELS cars
+                        if (AssortedCalloutsHandler.LightsOffForELSCars &&
+                            PoliceCar.IsSirenOn &&
+                            PoliceCar.VehicleModelIsELS())
+                        {
+                            PoliceCar.IsSirenOn = false;
+                        }
+
                         PoliceOfficer.Tasks.PerformDrivingManeuver(VehicleManeuver.Wait);
 
                         while (true)
