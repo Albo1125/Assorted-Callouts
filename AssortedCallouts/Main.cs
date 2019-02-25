@@ -57,7 +57,7 @@ namespace AssortedCallouts
         //Dependencies
         internal static Version Albo1125CommonVer = new Version("6.6.3.0");
         internal static Version MadeForGTAVersion = new Version("1.0.1604.1");
-        internal static string[] AudioFilesToCheckFor = new string[] { "LSPDFR/Police Scanner/Assorted Callouts Audio/Crimes/CRIME_ROBBERY.wav", "LSPDFR/Police Scanner/Assorted Callouts Audio/Crimes/CRIME_SUSPICIOUSVEHICLE.wav" };
+        internal static string[] AudioFilesToCheckFor = new string[] { "LSPDFR/audio/scanner/Assorted Callouts Audio/Crimes/CRIME_ROBBERY.wav", "LSPDFR/audio/scanner/Assorted Callouts Audio/Crimes/CRIME_SUSPICIOUSVEHICLE.wav" };
         internal static float MinimumRPHVersion = 0.51f;
         internal static Version RAGENativeUIVersion = new Version("1.6.3.0");
         internal static Version MadeForLSPDFRVersion = new Version("0.4.39.22580");

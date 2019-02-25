@@ -282,11 +282,11 @@ namespace AssortedCallouts.Callouts.Solicitation
         private void GetIDForPersona(Persona pers)
         {
             string name = pers.FullName;
-            string birthday = pers.BirthDay.ToLongDateString();
+            string birthday = pers.Birthday.ToLongDateString();
             string gender = pers.Gender.ToString();
 
             //string licensestate = DriverPersona.LicenseState.ToString();
-            Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "Assorted Callouts", "Driving Licence", "~b~Name: ~s~" + name + "~n~~b~DOB: ~s~" + birthday + "~n~~b~Age: ~s~" + GetAge(pers.BirthDay).ToString() + "~n~~s~" + gender);
+            Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "Assorted Callouts", "Driving Licence", "~b~Name: ~s~" + name + "~n~~b~DOB: ~s~" + birthday + "~n~~b~Age: ~s~" + GetAge(pers.Birthday).ToString() + "~n~~s~" + gender);
             Game.DisplaySubtitle("~h~~b~Driving Licences can be checked with the police computer.", 4000);
             Game.LocalPlayer.Character.PlayAmbientSpeech("GENERIC_THANKS");
 
@@ -310,19 +310,19 @@ namespace AssortedCallouts.Callouts.Solicitation
             int roll = AssortedCalloutsHandler.rnd.Next(3);
             if (roll == 0)
             {
-                PassengerAnswers = new List<string>() { "Because he's my husband, officer.", "His name is " + DriverPersona.FullName, "He's " + GetAge(DriverPersona.BirthDay).ToString() + " years old!", "We're returning home, to our children!", "3 years, officer. Long time, huh?" };
-                DriverAnswers = new List<string>() { "Well, she's my wife!", "Uhhmm... " + PassengerPersona.FullName, "She is " + GetAge(PassengerPersona.BirthDay).ToString() + " years old, officer!", "We are going home to our kids!", "We celebrated our 3rd anniversary yesterday!" };
+                PassengerAnswers = new List<string>() { "Because he's my husband, officer.", "His name is " + DriverPersona.FullName, "He's " + GetAge(DriverPersona.Birthday).ToString() + " years old!", "We're returning home, to our children!", "3 years, officer. Long time, huh?" };
+                DriverAnswers = new List<string>() { "Well, she's my wife!", "Uhhmm... " + PassengerPersona.FullName, "She is " + GetAge(PassengerPersona.Birthday).ToString() + " years old, officer!", "We are going home to our kids!", "We celebrated our 3rd anniversary yesterday!" };
             }
             else if (roll == 1)
             {
-                PassengerAnswers = new List<string>() { "He's my husband, officer!", "His name is " + DriverPersona.FullName, "He's " + GetAge(DriverPersona.BirthDay).ToString() + " years old, officer!", "We're returning home to have food.", "4 years, officer. That's a long time, hm?" };
-                DriverAnswers = new List<string>() { "She's only my wife, but yea...", "My sunshine's name is " + PassengerPersona.FullName, "She is " + GetAge(PassengerPersona.BirthDay).ToString() + " years old. How rude to ask!", "We are going to have food at home.", "We celebrated our 4th anniversary a week ago!" };
+                PassengerAnswers = new List<string>() { "He's my husband, officer!", "His name is " + DriverPersona.FullName, "He's " + GetAge(DriverPersona.Birthday).ToString() + " years old, officer!", "We're returning home to have food.", "4 years, officer. That's a long time, hm?" };
+                DriverAnswers = new List<string>() { "She's only my wife, but yea...", "My sunshine's name is " + PassengerPersona.FullName, "She is " + GetAge(PassengerPersona.Birthday).ToString() + " years old. How rude to ask!", "We are going to have food at home.", "We celebrated our 4th anniversary a week ago!" };
             }
             else
             {
                 
-                PassengerAnswers = new List<string>() { "He's my husband, hadn't you noticed?", "Mr Sexy... Nah, it's " + DriverPersona.FullName, "He's " + GetAge(DriverPersona.BirthDay).ToString() + " years young.", "We're going to a restaurant.", "6 years, officer. That's a long time, hm?" };
-                DriverAnswers = new List<string>() { "Why do you think? She's my wife!", "My honey's name is " + PassengerPersona.FullName, "She is " + GetAge(PassengerPersona.BirthDay).ToString() + " years old.", "We're on our way to a BurgerShot!", "For about 6 years, I think? Time passes quickly." };
+                PassengerAnswers = new List<string>() { "He's my husband, hadn't you noticed?", "Mr Sexy... Nah, it's " + DriverPersona.FullName, "He's " + GetAge(DriverPersona.Birthday).ToString() + " years young.", "We're going to a restaurant.", "6 years, officer. That's a long time, hm?" };
+                DriverAnswers = new List<string>() { "Why do you think? She's my wife!", "My honey's name is " + PassengerPersona.FullName, "She is " + GetAge(PassengerPersona.Birthday).ToString() + " years old.", "We're on our way to a BurgerShot!", "For about 6 years, I think? Time passes quickly." };
             }
         }
         private void GetDriverAndPassengerAnswersNotMarried()
@@ -330,20 +330,20 @@ namespace AssortedCallouts.Callouts.Solicitation
             int roll = AssortedCalloutsHandler.rnd.Next(3);
             if (roll == 0)
             {
-                PassengerAnswers = new List<string>() { "That's none of your business!", "His name is " + DriverPersona.Forename + " " + GetRandomSurname(), "He's " + (GetAge(DriverPersona.BirthDay) + AssortedCalloutsHandler.rnd.Next(1, 5)).ToString() + " years old!", "We're going shopping!", AssortedCalloutsHandler.rnd.Next(2, 6).ToString() + " months, officer!" };
-                DriverAnswers = new List<string>() { "What do you care?", "Uhhmm... " + PassengerPersona.Forename + " " + GetRandomSurname(), "She is " + (GetAge(PassengerPersona.BirthDay) + 1).ToString() + " years old, officer!", "We are going back to my place!", "About " + AssortedCalloutsHandler.rnd.Next(2, 6).ToString() + " months, officer!" };
+                PassengerAnswers = new List<string>() { "That's none of your business!", "His name is " + DriverPersona.Forename + " " + GetRandomSurname(), "He's " + (GetAge(DriverPersona.Birthday) + AssortedCalloutsHandler.rnd.Next(1, 5)).ToString() + " years old!", "We're going shopping!", AssortedCalloutsHandler.rnd.Next(2, 6).ToString() + " months, officer!" };
+                DriverAnswers = new List<string>() { "What do you care?", "Uhhmm... " + PassengerPersona.Forename + " " + GetRandomSurname(), "She is " + (GetAge(PassengerPersona.Birthday) + 1).ToString() + " years old, officer!", "We are going back to my place!", "About " + AssortedCalloutsHandler.rnd.Next(2, 6).ToString() + " months, officer!" };
 
             }
             else if (roll == 1)
             {
-                PassengerAnswers = new List<string>() { "He's my husband, officer!", "His name is " + DriverPersona.Forename + " " + GetRandomSurname(), "He's " + (GetAge(DriverPersona.BirthDay) + AssortedCalloutsHandler.rnd.Next(1, 5)).ToString() + " years old, officer!", "We're returning home to have food.", "A year, officer. That's a long time, hm?" };
-                DriverAnswers = new List<string>() { "She's only my wife, but yea...", "My sunshine's name is " + PassengerPersona.Forename + " " + GetRandomSurname(), "She is " + (GetAge(PassengerPersona.BirthDay) + AssortedCalloutsHandler.rnd.Next(5)).ToString() + " years old. How rude to ask!", "We are going to have food at home.", "We celebrated our first anniversary a week ago!" };
+                PassengerAnswers = new List<string>() { "He's my husband, officer!", "His name is " + DriverPersona.Forename + " " + GetRandomSurname(), "He's " + (GetAge(DriverPersona.Birthday) + AssortedCalloutsHandler.rnd.Next(1, 5)).ToString() + " years old, officer!", "We're returning home to have food.", "A year, officer. That's a long time, hm?" };
+                DriverAnswers = new List<string>() { "She's only my wife, but yea...", "My sunshine's name is " + PassengerPersona.Forename + " " + GetRandomSurname(), "She is " + (GetAge(PassengerPersona.Birthday) + AssortedCalloutsHandler.rnd.Next(5)).ToString() + " years old. How rude to ask!", "We are going to have food at home.", "We celebrated our first anniversary a week ago!" };
 
             }
             else if (roll == 2)
             {
-                PassengerAnswers = new List<string>() { "Because I like him!", "Ummm... It was " + DriverPersona.Forename + " " + GetRandomSurname(), "I think he must be " + (GetAge(DriverPersona.BirthDay) + AssortedCalloutsHandler.rnd.Next(1, 5)).ToString() + " years old?", "Just driving around, you know?!", "A few days, officer. I met him at the movies." };
-                DriverAnswers = new List<string>() { "She's a very nice girl, don't you think?", "Her name is, uhh,  " + PassengerPersona.Forename + " " + GetRandomSurname(), "She looks " + (GetAge(PassengerPersona.BirthDay) + AssortedCalloutsHandler.rnd.Next(5)).ToString() + " years old to me.", "Just cruising, officer. Lovely day!", "I met her through LifeInvader a week ago." };
+                PassengerAnswers = new List<string>() { "Because I like him!", "Ummm... It was " + DriverPersona.Forename + " " + GetRandomSurname(), "I think he must be " + (GetAge(DriverPersona.Birthday) + AssortedCalloutsHandler.rnd.Next(1, 5)).ToString() + " years old?", "Just driving around, you know?!", "A few days, officer. I met him at the movies." };
+                DriverAnswers = new List<string>() { "She's a very nice girl, don't you think?", "Her name is, uhh,  " + PassengerPersona.Forename + " " + GetRandomSurname(), "She looks " + (GetAge(PassengerPersona.Birthday) + AssortedCalloutsHandler.rnd.Next(5)).ToString() + " years old to me.", "Just cruising, officer. Lovely day!", "I met her through LifeInvader a week ago." };
 
             }
         }
