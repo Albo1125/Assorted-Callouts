@@ -93,7 +93,7 @@ namespace AssortedCallouts
             if (sender != CalloutSelectMenu) { return; }
             if (selectedItem == ConfirmItem)
             {
-                string name = CalloutListItem.IndexToItem(CalloutListItem.Index);
+                string name = CalloutListItem.Collection[CalloutListItem.Index].ToString();
                 Command_StartCallout(name);
             }
         }
