@@ -301,7 +301,7 @@ namespace AssortedCallouts.Callouts.Solicitation
         }
         private string GetRandomSurname()
         {
-            string randomname = Persona.GetRandomFullName();
+            string randomname = PersonaHelper.GetRandomFullName();
             return randomname.Substring(randomname.IndexOf(' ') + 1);
         }
 
@@ -358,16 +358,16 @@ namespace AssortedCallouts.Callouts.Solicitation
                 Game.LogTrivial("Hookedothervehicles false, roll " + roll.ToString());
                 if (roll == 0)
                 {
-                    DateTime DriverBirthday = DriverPersona.BirthDay;
-                    DateTime PassengerBirthday = PassengerPersona.BirthDay;
+                    DateTime DriverBirthday = DriverPersona.Birthday;
+                    DateTime PassengerBirthday = PassengerPersona.Birthday;
                     while (GetAge(DriverBirthday) < 26) { DriverBirthday = DriverBirthday.AddYears(-1); }
                     while (GetAge(PassengerBirthday) - GetAge(DriverBirthday) > 3) { PassengerBirthday = PassengerBirthday.AddYears(1); GameFiber.Yield(); }
                     while (GetAge(DriverBirthday) - GetAge(PassengerBirthday) > 3) { PassengerBirthday = PassengerBirthday.AddYears(-1); GameFiber.Yield(); }
 
-
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerBirthday, PassengerPersona.Citations, PassengerPersona.Forename, DriverPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, false, false, false);
+                    PassengerPersona.Birthday = PassengerBirthday;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverBirthday, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, false, false, false);
+                    DriverPersona.Birthday = DriverBirthday;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersMarried();
                     DriverShouldBeArrested = false;
@@ -375,14 +375,16 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else if (roll == 1)
                 {
-                    DateTime DriverBirthday = DriverPersona.BirthDay;
-                    DateTime PassengerBirthday = PassengerPersona.BirthDay;
+                    DateTime DriverBirthday = DriverPersona.Birthday;
+                    DateTime PassengerBirthday = PassengerPersona.Birthday;
                     while (GetAge(DriverBirthday) < 25) { DriverBirthday = DriverBirthday.AddYears(-1); }
                     while (GetAge(PassengerBirthday) - GetAge(DriverBirthday) > 4) { PassengerBirthday = PassengerBirthday.AddYears(1); GameFiber.Yield(); }
                     while (GetAge(DriverBirthday) - GetAge(PassengerBirthday) > 4) { PassengerBirthday = PassengerBirthday.AddYears(-1); GameFiber.Yield(); }
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerBirthday, PassengerPersona.Citations, PassengerPersona.Forename, DriverPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, true, false, false);
+                    PassengerPersona.Birthday = PassengerBirthday;
+                    PassengerPersona.Wanted = true;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverBirthday, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, false, false, false);
+                    DriverPersona.Birthday = DriverBirthday;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersMarried();
                     DriverShouldBeArrested = false;
@@ -390,14 +392,17 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else if (roll == 2)
                 {
-                    DateTime DriverBirthday = DriverPersona.BirthDay;
-                    DateTime PassengerBirthday = PassengerPersona.BirthDay;
+                    DateTime DriverBirthday = DriverPersona.Birthday;
+                    DateTime PassengerBirthday = PassengerPersona.Birthday;
                     while (GetAge(DriverBirthday) < 25) { DriverBirthday = DriverBirthday.AddYears(-1); }
                     while (GetAge(PassengerBirthday) - GetAge(DriverBirthday) > 4) { PassengerBirthday = PassengerBirthday.AddYears(1); GameFiber.Yield(); }
                     while (GetAge(DriverBirthday) - GetAge(PassengerBirthday) > 4) { PassengerBirthday = PassengerBirthday.AddYears(-1); GameFiber.Yield(); }
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerBirthday, PassengerPersona.Citations, PassengerPersona.Forename, DriverPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, false, false, false);
+                    PassengerPersona.Birthday = PassengerBirthday;
+                    
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverBirthday, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, true, false, false);
+                    DriverPersona.Birthday = DriverBirthday;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
+                    DriverPersona.Wanted = true;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersMarried();
                     DriverShouldBeArrested = true;
@@ -405,14 +410,17 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else if (roll == 3)
                 {
-                    DateTime DriverBirthday = DriverPersona.BirthDay;
-                    DateTime PassengerBirthday = PassengerPersona.BirthDay;
+                    DateTime DriverBirthday = DriverPersona.Birthday;
+                    DateTime PassengerBirthday = PassengerPersona.Birthday;
                     while (GetAge(DriverBirthday) < 25) { DriverBirthday = DriverBirthday.AddYears(-1); }
                     while (GetAge(PassengerBirthday) - GetAge(DriverBirthday) > 4) { PassengerBirthday = PassengerBirthday.AddYears(1); GameFiber.Yield(); }
                     while (GetAge(DriverBirthday) - GetAge(PassengerBirthday) > 4) { PassengerBirthday = PassengerBirthday.AddYears(-1); GameFiber.Yield(); }
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerBirthday, PassengerPersona.Citations, PassengerPersona.Forename, DriverPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, true, false, false);
+                    PassengerPersona.Birthday = PassengerBirthday;
+                    PassengerPersona.Wanted = true;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverBirthday, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, true, false, false);
+                    DriverPersona.Birthday = DriverBirthday;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
+                    DriverPersona.Wanted = true;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersMarried();
                     DriverShouldBeArrested = true;
@@ -420,9 +428,10 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else
                 {
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerPersona.BirthDay, PassengerPersona.Citations, PassengerPersona.Forename, PassengerPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, false, false, false);
+                    PassengerPersona.Wanted = false;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverPersona.BirthDay, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, false, false, false);
+                    DriverPersona.Wanted = false;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersNotMarried();
                     DriverShouldBeArrested = true;
@@ -436,9 +445,10 @@ namespace AssortedCallouts.Callouts.Solicitation
                 Game.LogTrivial("Hookedothervehicles true, roll " + roll.ToString());
                 if (roll == 0)
                 {
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerPersona.BirthDay, PassengerPersona.Citations, PassengerPersona.Forename, PassengerPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, false, false, false);
+                    PassengerPersona.Wanted = false;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverPersona.BirthDay, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, false, false, false);
+                    DriverPersona.Wanted = false;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersNotMarried();
                     DriverShouldBeArrested = true;
@@ -447,9 +457,10 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else if (roll == 1)
                 {
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerPersona.BirthDay, PassengerPersona.Citations, PassengerPersona.Forename, PassengerPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, true, false, false);
+                    PassengerPersona.Wanted = true;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverPersona.BirthDay, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, true, false, false);
+                    DriverPersona.Wanted = true;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersNotMarried();
                     DriverShouldBeArrested = true;
@@ -458,9 +469,10 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else if (roll == 2)
                 {
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerPersona.BirthDay, PassengerPersona.Citations, PassengerPersona.Forename, PassengerPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, false, false, false);
+                    PassengerPersona.Wanted = false;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverPersona.BirthDay, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, true, false, false);
+                    DriverPersona.Wanted = true;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersNotMarried();
                     DriverShouldBeArrested = true;
@@ -469,9 +481,10 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else if (roll == 3)
                 {
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerPersona.BirthDay, PassengerPersona.Citations, PassengerPersona.Forename, PassengerPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, true, false, false);
+                    PassengerPersona.Wanted = true;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverPersona.BirthDay, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, false, false, false);
+                    DriverPersona.Wanted = false;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersNotMarried();
                     DriverShouldBeArrested = true;
@@ -480,16 +493,18 @@ namespace AssortedCallouts.Callouts.Solicitation
                 }
                 else
                 {
-                    DateTime DriverBirthday = DriverPersona.BirthDay;
-                    DateTime PassengerBirthday = PassengerPersona.BirthDay;
+                    DateTime DriverBirthday = DriverPersona.Birthday;
+                    DateTime PassengerBirthday = PassengerPersona.Birthday;
                     while (GetAge(DriverBirthday) < 26) { DriverBirthday = DriverBirthday.AddYears(-1); }
                     while (GetAge(PassengerBirthday) - GetAge(DriverBirthday) > 3) { PassengerBirthday = PassengerBirthday.AddYears(1); GameFiber.Yield(); }
                     while (GetAge(DriverBirthday) - GetAge(PassengerBirthday) > 3) { PassengerBirthday = PassengerBirthday.AddYears(-1); GameFiber.Yield(); }
 
-
-                    PassengerPersona = new Persona(Passenger, PassengerPersona.Gender, PassengerBirthday, PassengerPersona.Citations, PassengerPersona.Forename, DriverPersona.Surname, PassengerPersona.LicenseState, PassengerPersona.TimesStopped, true, false, false);
+                    PassengerPersona.Birthday = PassengerBirthday;
+                    PassengerPersona.Wanted = true;
                     Functions.SetPersonaForPed(Passenger, PassengerPersona);
-                    DriverPersona = new Persona(Driver, DriverPersona.Gender, DriverBirthday, DriverPersona.Citations, DriverPersona.Forename, DriverPersona.Surname, ELicenseState.Valid, DriverPersona.TimesStopped, false, false, false);
+                    DriverPersona.Wanted = false;
+                    DriverPersona.ELicenseState = ELicenseState.Valid;
+                    DriverPersona.Birthday = DriverBirthday;
                     Functions.SetPersonaForPed(Driver, DriverPersona);
                     GetDriverAndPassengerAnswersMarried();
                     DriverShouldBeArrested = false;
