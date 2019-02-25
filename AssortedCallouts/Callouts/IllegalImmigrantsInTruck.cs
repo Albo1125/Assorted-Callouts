@@ -90,7 +90,7 @@ namespace AssortedCallouts.Callouts
                 immigrant.WarpIntoVehicle(SuspectCar, i + 1);
 
                 Persona immigrantpersona = Functions.GetPersonaForPed(immigrant);
-                immigrantpersona= new Persona(immigrant, immigrantpersona.Gender, immigrantpersona.BirthDay, immigrantpersona.Citations, immigrantpersona.Forename, immigrantpersona.Surname, ELicenseState.None, immigrantpersona.TimesStopped, true, false, false);
+                immigrantpersona.Wanted = true;
                 Functions.SetPersonaForPed(immigrant, immigrantpersona);
                 
             }
