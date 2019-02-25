@@ -239,6 +239,7 @@ namespace AssortedCallouts.Callouts
         {
             Game.LocalPlayer.Character.IsPositionFrozen = true;
             MariaCopCar = new Vehicle("POLICE", MariaSpawnPoint, MariaSpawnHeading);
+            Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(MariaCopCar);
 
             MariaCopCar.IsSirenOn = true;
             MariaCop = MariaCopCar.CreateRandomDriver();
@@ -2441,6 +2442,7 @@ namespace AssortedCallouts.Callouts
             for (int i = 0; i < AmbulanceLocations.Count; i++)
             {
                 Vehicle ambulance = new Vehicle(new Model("AMBULANCE"), AmbulanceLocations[i], AmbulanceHeadings[i]);
+                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(ambulance);
                 ambulance.IsPersistent = true;
                 ambulance.IsSirenOn = true;
                 ambulance.IsSirenSilent = true;
@@ -2459,6 +2461,7 @@ namespace AssortedCallouts.Callouts
             for (int i = 0; i < FireTruckLocations.Count; i++)
             {
                 Vehicle firetruck = new Vehicle(new Model("FIRETRUK"), FireTruckLocations[i], FireTruckHeadings[i]);
+                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(firetruck);
                 firetruck.IsPersistent = true;
                 firetruck.IsSirenOn = true;
                 firetruck.IsSirenSilent = true;
@@ -2546,6 +2549,7 @@ namespace AssortedCallouts.Callouts
             for (int i = 0; i < POLICECarLocations.Count; i++)
             {
                 Vehicle car = new Vehicle("POLICE", POLICECarLocations[i], POLICECarHeadings[i]);
+                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(car);
                 car.IsPersistent = true;
                 car.IsSirenOn = true;
                 car.IsSirenSilent = true;
@@ -2555,6 +2559,7 @@ namespace AssortedCallouts.Callouts
             for (int i = 0; i < POLICE2CarLocations.Count; i++)
             {
                 Vehicle car = new Vehicle("POLICE2", POLICE2CarLocations[i], POLICE2CarHeadings[i]);
+                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(car);
                 car.IsPersistent = true;
                 car.IsSirenOn = true;
                 car.IsSirenSilent = true;
@@ -2564,6 +2569,7 @@ namespace AssortedCallouts.Callouts
             for (int i = 0; i < POLICE3CarLocations.Count; i++)
             {
                 Vehicle car = new Vehicle("POLICE3", POLICE3CarLocations[i], POLICE3CarHeadings[i]);
+                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(car);
                 car.IsPersistent = true;
                 car.IsSirenOn = true;
                 car.IsSirenSilent = true;
@@ -2573,6 +2579,7 @@ namespace AssortedCallouts.Callouts
             for (int i = 0; i < RiotLocations.Count; i++)
             {
                 Vehicle car = new Vehicle("RIOT", RiotLocations[i], RiotHeadings[i]);
+                Albo1125.Common.CommonLibrary.ExtensionMethods.RandomiseLicencePlate(car);
                 car.IsPersistent = true;
                 car.IsSirenOn = true;
                 car.IsSirenSilent = true;

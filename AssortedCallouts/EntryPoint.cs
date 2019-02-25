@@ -106,7 +106,7 @@ namespace AssortedCallouts
                 IllegalImmigrantsInTruckEnabled = initialiseFile().ReadBoolean("Illegal Immigrants in Truck", "IllegalImmigrantsInTruckEnabled");
                 IllegalImmigrantsInTruckFrequency  = initialiseFile().ReadInt32("Illegal Immigrants in Truck", "IllegalImmigrantsInTruckFrequency", 2);
 
-
+                LightsOffForELSCars = initialiseFile().ReadBoolean("Traffic Stop Backup", "LightsOffForELSCars", false);
 
             }
             catch (Exception e)
@@ -312,6 +312,13 @@ namespace AssortedCallouts
 
         public static string DivisionUnitBeat = "1-ADAM-12";
         public static string DivisionUnitBeatAudioString = "DIV_01 ADAM BEAT_12";
+
+        /// <summary>
+        /// When true, AI officers will not use their lights (and therefore siren) if they are driving
+        /// an ELS vehicle. This prevents, for example, officers sitting on a traffic stop blaring the
+        /// siren. By the way, ELS people, plz can we have api 4 control siren thx. :P
+        /// </summary>
+        public static bool LightsOffForELSCars = false;
 
         public static KeysConverter kc = new KeysConverter();
         

@@ -91,6 +91,7 @@ namespace AssortedCallouts.Callouts
 
 
             SuspectCar = new Vehicle(GroundVehiclesToSelectFrom[AssortedCalloutsHandler.rnd.Next(GroundVehiclesToSelectFrom.Length)], CarSpawn);
+            SuspectCar.RandomiseLicencePlate();
             SuspectCar.IsPersistent = true;
             
             //GameFiber.Yield();
