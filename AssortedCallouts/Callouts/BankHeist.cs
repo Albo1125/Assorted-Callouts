@@ -25,7 +25,7 @@ namespace AssortedCallouts.Callouts
 
         private bool fighting = false;
         private bool CalloutRunning = false;
-        private System.Media.SoundPlayer AlarmPlayer = new System.Media.SoundPlayer("LSPDFR/Police Scanner/Assorted Callouts Audio/ALARM_BELL.wav");
+        private System.Media.SoundPlayer AlarmPlayer = new System.Media.SoundPlayer("LSPDFR/audio/scanner/Assorted Callouts Audio/ALARM_BELL.wav");
         private bool AudioStateChanged = false;
 
         private bool AlarmPlaying = false;

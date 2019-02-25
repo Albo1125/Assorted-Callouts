@@ -82,7 +82,7 @@ namespace AssortedCallouts
             for (int i = 0; i < TimesToPlay; i++)
             {
                 wmp1.settings.volume = 100;
-                wmp1.URL = "LSPDFR/Police Scanner/Assorted Callouts Audio/PHONE_CALLING.wav";
+                wmp1.URL = "LSPDFR/audio/scanner/Assorted Callouts Audio/PHONE_CALLING.wav";
                 GameFiber.Wait(3000);
             }
         }
@@ -91,7 +91,7 @@ namespace AssortedCallouts
             for (int i = 0; i < TimesToPlay; i++)
             {
                 wmp1.settings.volume = 100;
-                wmp1.URL = "LSPDFR/Police Scanner/Assorted Callouts Audio/PHONE_BUSY.wav";
+                wmp1.URL = "LSPDFR/audio/scanner/Assorted Callouts Audio/PHONE_BUSY.wav";
 
                 GameFiber.Wait(800);
             }
@@ -136,17 +136,17 @@ namespace AssortedCallouts
                             try
                             {
                                 wmp1.controls.stop();
-                                if (File.Exists("LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav"))
+                                if (File.Exists("LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav"))
                                 {
                                     wmp1.settings.volume = 100;
-                                    wmp1.URL = "LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav";
+                                    wmp1.URL = "LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav";
                                 }
                                 else
                                 {
-                                    Game.LogTrivial("Audio File not found at " + "LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav");
+                                    Game.LogTrivial("Audio File not found at " + "LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav");
                                 }
                             }
-                            catch (Exception e) { Game.LogTrivial("Audio File not found at " + "LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav"); }
+                            catch (Exception e) { Game.LogTrivial("Audio File not found at " + "LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + CptWellsLineAudioCount.ToString() + ".wav"); }
                             CptWellsLineAudioCount++;
                         }
                         else if (PersonTalking == "You")
@@ -154,17 +154,17 @@ namespace AssortedCallouts
                             try
                             {
                                 wmp1.controls.stop();
-                                if (File.Exists("LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav"))
+                                if (File.Exists("LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav"))
                                 {
                                     wmp1.settings.volume = 100;
-                                    wmp1.URL = "LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav";
+                                    wmp1.URL = "LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav";
                                 }
                                 else
                                 {
-                                    Game.LogTrivial("Audio File not found at " + "LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav");
+                                    Game.LogTrivial("Audio File not found at " + "LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav");
                                 }
                             }
-                            catch (Exception e) { Game.LogTrivial("Audio File not found at " + "LSPDFR/Police Scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav"); }
+                            catch (Exception e) { Game.LogTrivial("Audio File not found at " + "LSPDFR/audio/scanner/Assorted Callouts Audio/Lines/" + LineFolderModifier + "/" + PersonTalking + "/Line" + YouLineAudioCount.ToString() + ".wav"); }
                             YouLineAudioCount++;
 
                         }
