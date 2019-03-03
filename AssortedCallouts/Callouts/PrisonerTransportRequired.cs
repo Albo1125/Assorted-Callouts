@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LSPD_First_Response.Engine.Scripting.Entities;
 using LSPD_First_Response.Mod.Callouts;
 using LSPD_First_Response.Mod.API;
 using System.Threading.Tasks;
@@ -82,12 +83,19 @@ namespace AssortedCallouts.Callouts
             PoliceCar.MakePersistent();
             PoliceCar.IsSirenOn = true;
             PoliceCar.IsSirenSilent = true;
+            if (AssortedCalloutsHandler.LightsOffForELSCars &&
+                            PoliceCar.IsSirenOn &&
+                            PoliceCar.VehicleModelIsELS())
+            {
+                PoliceCar.IsSirenOn = false;
+            }
             PoliceOfficer = PoliceCar.CreateRandomDriver();
             PoliceOfficer.MakeMissionPed();
             PoliceOfficerBlip = PoliceOfficer.AttachBlip();
             PoliceOfficerBlip.Color = Color.Green;
             PoliceOfficerBlip.IsRouteEnabled = true;
-            PoliceOfficer.RelationshipGroup = "PLAYER";
+            PoliceOfficer.RelationshipGroup = "COP";
+            
             SuspectCar = new Vehicle(GroundVehiclesToSelectFrom[AssortedCalloutsHandler.rnd.Next(GroundVehiclesToSelectFrom.Length)], PoliceCar.GetOffsetPosition(Vector3.RelativeFront * 9f), PoliceCar.Heading);
             SuspectCar.RandomiseLicencePlate();
             SuspectCar.MakePersistent();
@@ -95,7 +103,6 @@ namespace AssortedCallouts.Callouts
             Suspect.MakeMissionPed();
 
             Suspect.WarpIntoVehicle(PoliceCar, PoliceCar.PassengerCapacity - 1);
-            Functions.SetPedAsArrested(Suspect);
             Suspect.Tasks.PlayAnimation("mp_arresting", "idle", 8f, AnimationFlags.UpperBodyOnly | AnimationFlags.SecondaryTask | AnimationFlags.Loop);
             Suspect.RelationshipGroup = "TBACKUPCRIMINAL";
             MainLogic();
@@ -178,29 +185,19 @@ namespace AssortedCallouts.Callouts
                     if (CalloutRunning)
                     {
                         if (Suspect.IsInAnyVehicle(false))
-                        {
-                            Suspect.Tasks.LeaveVehicle(LeaveVehicleFlags.None).WaitForCompletion(3000);
-                        }
-                        
+                            if (!Suspect.IsInVehicle(Game.LocalPlayer.Character.LastVehicle, false))
+                            {
+                                Suspect.Tasks.LeaveVehicle(LeaveVehicleFlags.None).WaitForCompletion(3000);
+                            }
 
                     }
-                    while (CalloutRunning)
+
+                    if (Suspect.IsInAnyVehicle(false))
                     {
-                        GameFiber.Yield();
-                        Suspect.Tasks.FollowNavigationMeshToPosition(Game.LocalPlayer.Character.GetOffsetPosition(Vector3.RelativeBack * 1.5f), Game.LocalPlayer.Character.Heading, 1.4f).WaitForCompletion(500);
-                        if (Game.LocalPlayer.Character.LastVehicle.Exists())
-                        {
-                            if (Game.LocalPlayer.Character.LastVehicle.DistanceTo(Suspect) < 3f)
-                            {
-                                Suspect.Tasks.Clear();
-                                Suspect.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, 6000, Game.LocalPlayer.Character.LastVehicle.PassengerCapacity - 1).WaitForCompletion(6100);
-                                
-                            }
-                        }
-                        if (Suspect.IsInAnyVehicle(false)) { break; }
+                        if (SuspectBlip.Exists()) { SuspectBlip.Delete(); }
+                        if (PoliceOfficerBlip.Exists()) { PoliceOfficerBlip.Delete(); }
                     }
-                    if (SuspectBlip.Exists()) { SuspectBlip.Delete(); }
-                    if (PoliceOfficerBlip.Exists()) { PoliceOfficerBlip.Delete(); }
+                    
                     
                     while (CalloutRunning)
                     {
