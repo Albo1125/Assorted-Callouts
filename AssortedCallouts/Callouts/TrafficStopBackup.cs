@@ -25,7 +25,7 @@ namespace AssortedCallouts.Callouts
         private Tuple<Vector3, float> ChosenSpawnData;
         private List<Blip> BlipList = new List<Blip>();
         private Vehicle PoliceCar;
-       
+        private Persona suspectPersona;
         private Ped PoliceOfficer;
         private Blip PoliceOfficerBlip;
         private string msg;
@@ -126,6 +126,7 @@ namespace AssortedCallouts.Callouts
             SuspectCar.RandomiseLicencePlate();
             SuspectCar.MakePersistent();
             Suspect = SuspectCar.CreateRandomDriver();
+            suspectPersona = Functions.GetPersonaForPed(Suspect);
             Suspect.MakeMissionPed();
             SuspectCar.IsEngineOn = true;
             Suspect.RelationshipGroup = "TBACKUPCRIMINAL";
@@ -872,6 +873,7 @@ namespace AssortedCallouts.Callouts
                     bool initiatePursuitImmediately = false;
                     Suspect.Health += 150;
                     Suspect.Armor += 50;
+                    suspectPersona = Functions.GetPersonaForPed(Suspect);
                     DispatchResponse();
                     int randomroll = AssortedCalloutsHandler.rnd.Next(7);
                     Game.LogTrivial("Randomroll: " + randomroll);
@@ -883,6 +885,7 @@ namespace AssortedCallouts.Callouts
                     }
                     else
                     {
+                        suspectPersona.Wanted = true;
                         float initiatePursuitDistance = Vector3.Distance(Game.LocalPlayer.Character.Position, Suspect.Position) * 0.3f;
                         if (initiatePursuitDistance < 70f) { initiatePursuitDistance = 70f; }
                         while (CalloutRunning)
@@ -1169,10 +1172,11 @@ namespace AssortedCallouts.Callouts
             {
                 try
                 {
-                    Persona suspectPersona = Functions.GetPersonaForPed(Suspect);
+                    
                     bool startfightimmediately = false;
                     Suspect.Health += 180;
                     Suspect.Armor += 60;
+                    suspectPersona.Wanted = true;
                     DispatchResponse();
                     int roll = AssortedCalloutsHandler.rnd.Next(5);
                     Game.LogTrivial("Roll: " + roll.ToString());
@@ -1196,7 +1200,7 @@ namespace AssortedCallouts.Callouts
 
                                 PoliceOfficerBlip.IsRouteEnabled = false;
                                 startfightimmediately = true;
-                                suspectPersona.Wanted = true;
+                                
                                 if (ComputerPlusRunning)
                                 {
                                     API.ComputerPlusFuncs.SetCalloutStatusToAtScene(CalloutID);
