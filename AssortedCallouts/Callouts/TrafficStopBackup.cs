@@ -25,7 +25,7 @@ namespace AssortedCallouts.Callouts
         private Tuple<Vector3, float> ChosenSpawnData;
         private List<Blip> BlipList = new List<Blip>();
         private Vehicle PoliceCar;
-        private Persona suspectPersona;
+        private Persona SuspectPersona;
         private Ped PoliceOfficer;
         private Blip PoliceOfficerBlip;
         private string msg;
@@ -126,7 +126,7 @@ namespace AssortedCallouts.Callouts
             SuspectCar.RandomiseLicencePlate();
             SuspectCar.MakePersistent();
             Suspect = SuspectCar.CreateRandomDriver();
-            suspectPersona = Functions.GetPersonaForPed(Suspect);
+            SuspectPersona = Functions.GetPersonaForPed(Suspect);
             Suspect.MakeMissionPed();
             SuspectCar.IsEngineOn = true;
             Suspect.RelationshipGroup = "TBACKUPCRIMINAL";
@@ -260,7 +260,7 @@ namespace AssortedCallouts.Callouts
                 HandleBackupOfficerCleanup();
                 if (Suspect.Exists())
                 {
-                    if (!Suspect.IsInAnyVehicle(false))
+                    if (!Suspect.IsInAnyVehicle(false) && !Functions.IsPedArrested(Suspect))
                     {
                         Suspect.Dismiss();
                     }
@@ -873,7 +873,7 @@ namespace AssortedCallouts.Callouts
                     bool initiatePursuitImmediately = false;
                     Suspect.Health += 150;
                     Suspect.Armor += 50;
-                    suspectPersona = Functions.GetPersonaForPed(Suspect);
+                    SuspectPersona = Functions.GetPersonaForPed(Suspect);
                     DispatchResponse();
                     int randomroll = AssortedCalloutsHandler.rnd.Next(7);
                     Game.LogTrivial("Randomroll: " + randomroll);
@@ -885,7 +885,8 @@ namespace AssortedCallouts.Callouts
                     }
                     else
                     {
-                        suspectPersona.Wanted = true;
+                        SuspectPersona.Wanted = true;
+                        Functions.SetPersonaForPed(Suspect, SuspectPersona);
                         float initiatePursuitDistance = Vector3.Distance(Game.LocalPlayer.Character.Position, Suspect.Position) * 0.3f;
                         if (initiatePursuitDistance < 70f) { initiatePursuitDistance = 70f; }
                         while (CalloutRunning)
@@ -1176,7 +1177,8 @@ namespace AssortedCallouts.Callouts
                     bool startfightimmediately = false;
                     Suspect.Health += 180;
                     Suspect.Armor += 60;
-                    suspectPersona.Wanted = true;
+                    SuspectPersona.Wanted = true;
+                    Functions.SetPersonaForPed(Suspect, SuspectPersona);
                     DispatchResponse();
                     int roll = AssortedCalloutsHandler.rnd.Next(5);
                     Game.LogTrivial("Roll: " + roll.ToString());
