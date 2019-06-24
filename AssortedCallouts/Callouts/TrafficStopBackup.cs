@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LSPD_First_Response.Engine.Scripting.Entities;
 using LSPD_First_Response.Mod.Callouts;
 using LSPD_First_Response.Mod.API;
 using Rage;
@@ -24,7 +25,7 @@ namespace AssortedCallouts.Callouts
         private Tuple<Vector3, float> ChosenSpawnData;
         private List<Blip> BlipList = new List<Blip>();
         private Vehicle PoliceCar;
-       
+        private Persona SuspectPersona;
         private Ped PoliceOfficer;
         private Blip PoliceOfficerBlip;
         private string msg;
@@ -120,11 +121,12 @@ namespace AssortedCallouts.Callouts
             PoliceOfficerBlip = PoliceOfficer.AttachBlip();
             PoliceOfficerBlip.Color = Color.Green;
             PoliceOfficerBlip.IsRouteEnabled = true;
-            PoliceOfficer.RelationshipGroup = "PLAYER";
+            PoliceOfficer.RelationshipGroup = "COP";
             SuspectCar = new Vehicle(suspectCarModel, PoliceCar.GetOffsetPosition(Vector3.RelativeFront * 9f), PoliceCar.Heading);
             SuspectCar.RandomiseLicencePlate();
             SuspectCar.MakePersistent();
             Suspect = SuspectCar.CreateRandomDriver();
+            SuspectPersona = Functions.GetPersonaForPed(Suspect);
             Suspect.MakeMissionPed();
             SuspectCar.IsEngineOn = true;
             Suspect.RelationshipGroup = "TBACKUPCRIMINAL";
@@ -258,7 +260,7 @@ namespace AssortedCallouts.Callouts
                 HandleBackupOfficerCleanup();
                 if (Suspect.Exists())
                 {
-                    if (!Suspect.IsInAnyVehicle(false))
+                    if (!Suspect.IsInAnyVehicle(false) && !Functions.IsPedArrested(Suspect))
                     {
                         Suspect.Dismiss();
                     }
@@ -473,8 +475,8 @@ namespace AssortedCallouts.Callouts
                 while (CalloutRunning)
                 {
                     GameFiber.Yield();
-                    Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "PLAYER", Relationship.Hate);
-                    Game.SetRelationshipBetweenRelationshipGroups("PLAYER", "TBACKUPCRIMINAL", Relationship.Hate);
+                    Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "COP", Relationship.Hate);
+                    Game.SetRelationshipBetweenRelationshipGroups("COP", "TBACKUPCRIMINAL", Relationship.Hate);
                     int randomroll = AssortedCalloutsHandler.rnd.Next(9);
                     
                     Game.LogTrivial("Randomroll:" + randomroll);
@@ -871,6 +873,7 @@ namespace AssortedCallouts.Callouts
                     bool initiatePursuitImmediately = false;
                     Suspect.Health += 150;
                     Suspect.Armor += 50;
+                    SuspectPersona = Functions.GetPersonaForPed(Suspect);
                     DispatchResponse();
                     int randomroll = AssortedCalloutsHandler.rnd.Next(7);
                     Game.LogTrivial("Randomroll: " + randomroll);
@@ -882,6 +885,8 @@ namespace AssortedCallouts.Callouts
                     }
                     else
                     {
+                        SuspectPersona.Wanted = true;
+                        Functions.SetPersonaForPed(Suspect, SuspectPersona);
                         float initiatePursuitDistance = Vector3.Distance(Game.LocalPlayer.Character.Position, Suspect.Position) * 0.3f;
                         if (initiatePursuitDistance < 70f) { initiatePursuitDistance = 70f; }
                         while (CalloutRunning)
@@ -1168,9 +1173,12 @@ namespace AssortedCallouts.Callouts
             {
                 try
                 {
+                    
                     bool startfightimmediately = false;
                     Suspect.Health += 180;
                     Suspect.Armor += 60;
+                    SuspectPersona.Wanted = true;
+                    Functions.SetPersonaForPed(Suspect, SuspectPersona);
                     DispatchResponse();
                     int roll = AssortedCalloutsHandler.rnd.Next(5);
                     Game.LogTrivial("Roll: " + roll.ToString());
@@ -1187,13 +1195,14 @@ namespace AssortedCallouts.Callouts
                         while (CalloutRunning)
                         {
                             GameFiber.Yield();
-                            Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "PLAYER", Relationship.Hate);
-                            Game.SetRelationshipBetweenRelationshipGroups("PLAYER", "TBACKUPCRIMINAL", Relationship.Hate);
+                            Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "COP", Relationship.Hate);
+                            Game.SetRelationshipBetweenRelationshipGroups("COP", "TBACKUPCRIMINAL", Relationship.Hate);
                             if (Vector3.Distance(Game.LocalPlayer.Character.Position, Suspect.Position) < initiatePursuitDistance)
                             {
 
                                 PoliceOfficerBlip.IsRouteEnabled = false;
                                 startfightimmediately = true;
+                                
                                 if (ComputerPlusRunning)
                                 {
                                     API.ComputerPlusFuncs.SetCalloutStatusToAtScene(CalloutID);
@@ -1208,8 +1217,8 @@ namespace AssortedCallouts.Callouts
                     while (CalloutRunning)
                     {
                         GameFiber.Yield();
-                        Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "PLAYER", Relationship.Hate);
-                        Game.SetRelationshipBetweenRelationshipGroups("PLAYER", "TBACKUPCRIMINAL", Relationship.Hate);
+                        Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "COP", Relationship.Hate);
+                        Game.SetRelationshipBetweenRelationshipGroups("COP", "TBACKUPCRIMINAL", Relationship.Hate);
                         if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) || startfightimmediately)
                         {
                             if (Suspect.IsInAnyVehicle(false)) { Suspect.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen).WaitForCompletion(5000); }
@@ -1232,8 +1241,8 @@ namespace AssortedCallouts.Callouts
                     while (CalloutRunning)
                     {
                         GameFiber.Yield();
-                        Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "PLAYER", Relationship.Hate);
-                        Game.SetRelationshipBetweenRelationshipGroups("PLAYER", "TBACKUPCRIMINAL", Relationship.Hate);
+                        Game.SetRelationshipBetweenRelationshipGroups("TBACKUPCRIMINAL", "COP", Relationship.Hate);
+                        Game.SetRelationshipBetweenRelationshipGroups("COP", "TBACKUPCRIMINAL", Relationship.Hate);
                         Rage.Native.NativeFunction.Natives.SET_AI_MELEE_WEAPON_DAMAGE_MODIFIER( 3f);
                         if (!Suspect.Exists())
                         {
