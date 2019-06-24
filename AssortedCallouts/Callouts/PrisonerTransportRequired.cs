@@ -95,8 +95,7 @@ namespace AssortedCallouts.Callouts
             Suspect.MakeMissionPed();
 
             Suspect.WarpIntoVehicle(PoliceCar, PoliceCar.PassengerCapacity - 1);
-            Functions.SetPedAsArrested(Suspect);
-            Suspect.Tasks.PlayAnimation("mp_arresting", "idle", 8f, AnimationFlags.UpperBodyOnly | AnimationFlags.SecondaryTask | AnimationFlags.Loop);
+            Functions.SetPedAsArrested(Suspect, true);
             Suspect.RelationshipGroup = "TBACKUPCRIMINAL";
             MainLogic();
             return base.OnCalloutAccepted();
