@@ -66,24 +66,24 @@
   <ItemGroup>
     <Reference Include="Albo1125.Common, Version=6.6.1.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath></HintPath>
+      <HintPath>dependencies\Albo1125.Common.dll</HintPath>
     </Reference>
     <Reference Include="ComputerPlus, Version=1.3.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath></HintPath>
+      <HintPath>dependencies\ComputerPlus.dll</HintPath>
     </Reference>
     <Reference Include="LSPD First Response, Version=0.4.39.22580, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath></HintPath>
+      <HintPath>dependencies\LSPD First Response.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RAGENativeUI, Version=1.6.3.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath></HintPath>
+      <HintPath>dependencies\RAGENativeUI.dll</HintPath>
     </Reference>
     <Reference Include="RagePluginHookSDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath></HintPath>
+      <HintPath>dependencies\RagePluginHookSDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -99,7 +99,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Traffic Policer, Version=6.14.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath></HintPath>
+      <HintPath>dependencies\Traffic Policer.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -156,8 +156,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>REM copy /Y "$(TargetDir)$(ProjectName).dll" "G:\Program Files\Rockstar Games\Grand Theft Auto V\Plugins\LSPDFR
+REM copy /Y "$(TargetDir)$(ProjectName).pdb" "G:\Program Files\Rockstar Games\Grand Theft Auto V\Plugins\LSPDFR</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
