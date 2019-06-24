@@ -55,12 +55,12 @@ namespace AssortedCallouts
 
         }
         //Dependencies
-        internal static Version Albo1125CommonVer = new Version("6.6.3.0");
+        internal static Version Albo1125CommonVer = new Version("6.6.4.0");
         internal static Version MadeForGTAVersion = new Version("1.0.1604.1");
         internal static string[] AudioFilesToCheckFor = new string[] { "LSPDFR/audio/scanner/Assorted Callouts Audio/Crimes/CRIME_ROBBERY.wav", "LSPDFR/audio/scanner/Assorted Callouts Audio/Crimes/CRIME_SUSPICIOUSVEHICLE.wav" };
         internal static float MinimumRPHVersion = 0.51f;
         internal static Version RAGENativeUIVersion = new Version("1.6.3.0");
-        internal static Version MadeForLSPDFRVersion = new Version("0.4.39.22580");
+        internal static Version MadeForLSPDFRVersion = new Version("0.4.2");
 
         internal static string DownloadURL = "https://www.lcpdfr.com/files/file/9689-assorted-callouts-shoplifting-store-robberies-petrolgas-theft-pacific-bank-heist-hot-pursuit-traffic-stop-backup-required-illegal-immigrants-in-truck/";
         internal static string FileID = "9689";
