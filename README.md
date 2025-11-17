@@ -1,4 +1,4 @@
-![Assorted Callouts](https://raw.githubusercontent.com/Albo1125/Assorted-Callouts/master/assortedcalloutsart.jpg?token=ANE1rYQmRiHoJuPJo4NkqpcizQUdc35sks5cAnEswA%3D%3D)
+![Assorted Callouts](https://s3-screenshots.int-cdn.lcpdfrusercontent.com/monthly_2015_12/567870fdd2c91_openpictur.jpg.390f36644a2d109420019bbef804e4e9.jpg)
 
 # Assorted Callouts
 Assorted Callouts is a plugin for LSPDFR by Albo1125 with over 800k downloads on lspdfr.com. Originally released in 2015, this was my first dedicated callout plugin for LSPDFR and contains the first of its kind Pacific Bank Heist callout.
